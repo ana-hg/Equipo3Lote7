@@ -1,4 +1,4 @@
-# RNA-Seq Analysis - Equipo3Lote7
+# RNA-Seq Analysis - Equipo 3 Lote 7
 
 ## 📚 Introducción  
 Este proyecto grupal tiene como objetivo principal el análisis de secuencias de ARN mediante herramientas bioinformáticas y técnicas de machine learning. A través de la secuenciación de ARN (RNA-Seq), buscamos explorar y comprender los procesos biológicos que regulan la expresión génica, identificando patrones, variantes genéticas y posibles transcripciones novedosas.  
