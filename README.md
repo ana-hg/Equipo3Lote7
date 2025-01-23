@@ -71,17 +71,17 @@ Estas tecnologías trabajan en conjunto para:
 
 ```plaintext
 RNA-Seq-Analysis-Equipo-3-lote-7/
-├── data/                     # Archivos de los datos crudos y procesados  
-├── scripts/                  # Scripts en R para cada uno de los paso del análisis  
-│   ├── preprocessing.R       # Limpieza e imputación de datos  
-│   ├── unsupervised.R        # Modelos no supervisadosPCA, t-SNE y clusterización  
+├── data/                     # Archivos de los datos crudos así como los procesados  
+├── scripts/                  # Scripts de R para cada uno de los pasos del análisis  
+│   ├── preprocessing.R       # Limpieza e imputación de datos crudos  
+│   ├── unsupervised.R        # Modelos no supervisados como PCA, t-SNE y clusterización  
 │   ├── supervised.R          # Modelos supervisados y métricas de evaluación  
 │   └── visualization.R       # Gráficos y visualizaciones  
 ├── results/                  # Resultados procesados e interpretaciones 
 │   ├── figures/              # Visualizaciones y gráficos  
 │   └── reports/              # Reportes en Markdown o html 
 ├── README.md                 # Descripción del proyecto de análisis
-└── environment.yml           # Dependencias y entorno virtual  
+└── environment.yml           # Las diferentes dependencias y entorno virtual  
 ```
 
 ---
