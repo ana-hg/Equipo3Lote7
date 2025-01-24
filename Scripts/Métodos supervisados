@@ -1,1 +1,93 @@
+#Carga de los datos de los genes problema
+columns <- read.csv("classes.csv", sep = ";")
+data <- read.csv("gene_expression.csv", sep = ";")
+headers <- read.table(file = "column_names.txt", header = FALSE)
 
+##### Metodos supervisados #######
+
+## Librerias utilizadas
+library(caret)
+ibrary(rattle)
+
+#Elaboramos el data frame para poder realizar el estudio
+data_ml <- cbind(columns, data)
+data_ml <- data_ml[, -1]
+
+#Dividiremos el conjunto de nuestros datos entre entrenamiento y prueba
+#Vamos a establecer una semilla de aleatoridad para que sea replicable
+
+TrainIndex <- createDataPartition(data_ml$CHC, p = 0.75, list = FALSE)
+trainData <- data_ml[TrainIndex,]
+testData <- data_ml[-TrainIndex,]
+
+#Nos aseguramos que la variable a predecir sea de tipo factor
+testData$CHC <- factor(testData$CHC)
+
+#Con caret utilizaremos modelo knn
+knnModel <- train(CHC~.,
+                  data = trainData,
+                  method = "knn",
+                  trControl = trainControl(method = "cv", number = 10),
+                  preProcess = c("center", "scale"),
+                  tuneLength = 10)
+knnModel
+plot(knnModel)
+
+
+#Con estos resultados que hemos entrenado vamos a intentar predecir los de testing
+
+predictions <- predict(knnModel, newdata = testData)
+predictions
+
+#Evaluaremos el modelo con la realización de una matriz de confusión
+predictions <- factor(predictions, levels = levels(testData$CHC))
+
+confusionMatrix(predictions, testData$CHC)
+
+#Obtenemos probablidades
+
+probabilities_knn <- predict(knnModel, newdata = testData, type = "prob")
+probabilities_knn
+#DecisionTree utilizando el paquete de Caret
+
+dtModel <- train(CHC~.,
+                 data = trainData,
+                 method = "rpart",
+                 trControl = trainControl(method = "cv", number = 5),
+                 preProcess = c("center", "scale"),
+                 tuneLength = 5)
+dtModel
+
+#Graficamos el modelo para ver resultados y con rattle vemos el arbol de decisión
+
+plot(dtModel)
+fancyRpartPlot(dtModel$finalModel, type = 2)
+
+##SVM Lineal con paquete de Caret
+
+svmModelLineal <- train(CHC~.,
+                        data = trainData,
+                        method = "svmLinear",
+                        trControl = trainControl(method = "cv", number = 5),
+                        preProcess = c("center", "scale"),
+                        tuneGrid = expand.grid(C = seq(0, 1, length = 5 )),
+                        prob.model = TRUE)
+svmModelLineal
+
+#Graficamos el modelo para ver resultados
+
+plot(svmModelLineal)
+
+#Realizamos las predicciones con el modelo entrenado
+
+predictionsSVM <- predict(svmModelLineal, newdata = testData)
+predictionsSVM
+
+#Comprobamos con matriz de confusión nuestras predicciones
+testData$CHC <- factor(testData$CHC)
+confusionMatrix(predictionsSVM, testData$CHC)
+
+#Obtenemos probablidades
+
+probabilities_SVMlineal <- predict(svmModelLineal, newdata = testData, type = "prob")
+probabilities_SVMlineal
