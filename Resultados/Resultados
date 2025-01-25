@@ -1,1 +1,51 @@
+#*Resultados*
+
+##*1.Métodos de aprendizaje supervisado*
+
+###*1.1.KNN*
+El método de k-NN es un método de aprendizaje supervisado que se basa en la idea básica de que las cosas que son similares probablemente tienen propiedades similares. Por lo tanto, para asignar una clase a nuevos datos, primero encontraremos instancias k de datos existentes que sean lo más similares posible (vecinos más cercanos) a los nuevos datos. Luego, usaremos las etiquetas de los vecinos más cercanos para predecir la etiqueta de los nuevos datos.
+El modelo que ha dado mayor precisión es k=19 vecinos. 
+La precisión global es de 1.
+
+###*1.2.Clasificador del árbol de decisión*
+El concepto básico de todos los algoritmos de clasificación basados en árboles es que adquieren una secuencia de interrogantes que dividen los casos en distintas categorías. Cada interrogante tiene una respuesta de sí o no, y los casos serán enviados por el camino izquierdo o derecho según los criterios que cumplan.
+El hiperparámetro que utiliza el _decisión tree_ es denomina cp, y el valor obtenido es de 0,031.
+La precisión global del clasificadordel árbol de decisión es de 0,827.
+
+###*1.3.SVmodel lineal*
+El algoritmo realiza la representación de los puntos de una muestra en un espacio y procede a separar las clases en 2 espacios de la manera más amplia posible.
+El hiperparámetro de este modelo es C, el resultado obtenido para el hiperparemetro C en nuestro estudio es 1.
+La precisión global del estudio es de 0,84. Aunque la precisión global es inferior al modelo knn, este modelo SVM es más preciso que el knn ya que las probablidaddes de los diferentes grupos no son 0 o 1 como en el modela knn.
+
+##*2.Metodos de aprendizaje no supervisados*
+
+###*2.1.Principal component analysis (PCA)*
+El PCA es una técnica lineal de reducción de dimensionalidad. Transforma un conjunto de datos en un nuevo conjunto de variables no correlacionadas, llamadas componentes principales.
+Para la visualización gráfica se han escogido los dos componentes más representativos, PC1 y PC2. Con estos componentes, PC1 y PC2 clasifica muy bien al grupo AGH del resto de los grupos estudiados CFB, CGC, CHC y HPB. Estos grupos, CFB, CGC, CHCy HPB comparten características.
+ 
+###*2.2.T-Distributed Stochastic Neighbor Embedding (t-SNE)*
+El t-SNE es una técnica no lineal de exploración y visualización de datos.
+En la visualización de todos los grupos los clasifica muy bien a todos ellos AGH, CFB, CGC, CHC, HPB Aunque hay algunos resultados outliers de los grupos CGC y HPB.
+Gráfico t-SNE
+
+###*2.3.Clusterización no jerárquica: K-means*
+K-means se trata de un método no jerárquico en el cual se asume que los puntos de datos se encuentran en grupos separados y no superpuestos. Esto significa que cada punto de datos pertenece solo a un grupo y que no existen grupos dentro de otros. K-means es un enfoque simple capaz de dividir un conjunto de datos en grupos de k, siendo k un número arbitrario.
+Realizamos clusterización usando K-means y jerárquica. K-means (con 3 clústeres)
+Se observa una clusterización jerárquica, en el que hay un grupo, el cluster 1, claramente diferenciado del resto que se encuentran anidados.
+
+ 
+##*3. Resumen resultados*
+
+###*3.1.Métodos de aprendizaje supervisado*
+Con los resultados obtenidos de: KNN precision global de 1, SVM precision global de 0, 84 y decisión tree precisión global de 0,827
+  1.	KNN con precisión global de 1:
+      Una precisión global de 1 significa que el modelo KNN ha clasificado correctamente al conjunto de datos. Es decir, el modelo no cometió ningún error durante la predicción. Sin embargo, esto puede ser un indicativo de que el modelo está sobreajustado, especialmente si se obtuvo una precisión perfecta en un conjunto de datos de entrenamiento. Esto sucede cuando el modelo ha aprendido demasiado bien las peculiaridades del conjunto de datos de entrenamiento, pero podría no generalizar bien a datos nuevos no vistos. 
+  2.	SVM con precisión global de 0.84:
+      Significa que ha acertado el 84% de las predicciones. Puede ser considerado como un modelo con un buen equilibrio entre precisión y generalización. 
+  3.	Árbol de decisión con precisión global de 0.827:
+      El árbol de decisión ha logrado una precisión de 0.827, lo que significa que acertó el 82.7% de las predicciones. Este es también un buen resultado, aunque en este caso está ligeramente por debajo de la SVM (0.84). Los árboles de decisión son fáciles de interpretar y pueden ser muy eficaces para capturar relaciones no lineales en los datos.
+
+###*3.2.Métodos de aprendizaje no supervisado*
+El modelo t-SNE en con el que se visualiza mejor  la clasificación de los grupos estudiados  AGH, CFB, CGC, CHC, HPB 
+
 
