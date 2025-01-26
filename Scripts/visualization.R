@@ -1,4 +1,13 @@
 ### ---- Confusion Matrix (unsupervised) ----
+
+knn_predictions <- predict(knnModel, newdata = testing.clase)
+dt_predictions <- predict(dtModel, newdata = testing.clase)
+svm_predictions <- predict(svmModelLineal, newdata = testing.clase)
+
+confusion.knn <-confusionMatrix(knn_predictions, testing.clase$Clase)
+confusion.dt <-confusionMatrix(dt_predictions, testing.clase$Clase)
+confusion.svm <-confusionMatrix(svm_predictions, testing.clase$Clase)
+
 plot_confusion_matrix <- function(conf_matrix, title) {
   cm <- as.data.frame(conf_matrix$table)
   ggplot(cm, aes(Prediction, Reference, fill = Freq)) +
@@ -9,9 +18,9 @@ plot_confusion_matrix <- function(conf_matrix, title) {
     theme_minimal()
 }
 
-plot.lda <- plot_confusion_matrix(confusion.lda, "Matriz de confusion LDA")
-plot.rda <- plot_confusion_matrix(confusion.rda, "Matriz de confusion RDA")
-plot.knn <- plot_confusion_matrix(confusion.knn, "Matriz de confusion k-NN")
+plot.lda <- plot_confusion_matrix(confusion.lda, "Matriz de confusion k-NN")
+plot.rda <- plot_confusion_matrix(confusion.rda, "Matriz de confusion Decision Tree")
+plot.knn <- plot_confusion_matrix(confusion.knn, "Matriz de confusion SVM Lineal")
 
 lista_plots <- list(plot.lda, plot.rda, plot.knn)
 conjunto <- wrap_plots(lista_plots, ncol = 3, nrow = 1, axis_titles = "collect", legend = "collect")
